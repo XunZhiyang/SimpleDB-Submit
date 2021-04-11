@@ -1,6 +1,7 @@
 package simpledb;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Iterator;
 
@@ -20,16 +21,24 @@ public class Tuple implements Serializable {
      *            the schema of this tuple. It must be a valid TupleDesc
      *            instance with at least one field.
      */
+
+    private TupleDesc desc;
+    private RecordId recordId;
+    private ArrayList<Field> fields;
+
     public Tuple(TupleDesc td) {
-        // some code goes here
+        desc = td;
+        fields = new ArrayList<>();
+        for (int i = 0; i < td.numFields(); ++i) {
+            fields.add(null);
+        }
     }
 
     /**
      * @return The TupleDesc representing the schema of this tuple.
      */
     public TupleDesc getTupleDesc() {
-        // some code goes here
-        return null;
+        return desc;
     }
 
     /**
@@ -37,8 +46,7 @@ public class Tuple implements Serializable {
      *         be null.
      */
     public RecordId getRecordId() {
-        // some code goes here
-        return null;
+        return recordId;
     }
 
     /**
@@ -48,7 +56,7 @@ public class Tuple implements Serializable {
      *            the new RecordId for this tuple.
      */
     public void setRecordId(RecordId rid) {
-        // some code goes here
+        this.recordId = rid;
     }
 
     /**
@@ -60,7 +68,7 @@ public class Tuple implements Serializable {
      *            new value for the field.
      */
     public void setField(int i, Field f) {
-        // some code goes here
+        fields.set(i, f);
     }
 
     /**
@@ -70,8 +78,7 @@ public class Tuple implements Serializable {
      *            field index to return. Must be a valid index.
      */
     public Field getField(int i) {
-        // some code goes here
-        return null;
+        return fields.get(i);
     }
 
     /**
@@ -83,8 +90,11 @@ public class Tuple implements Serializable {
      * where \t is any whitespace (except a newline)
      */
     public String toString() {
-        // some code goes here
-        throw new UnsupportedOperationException("Implement this");
+        StringBuilder ret = new StringBuilder(fields.get(0).toString());
+        for (int i = 1; i < fields.size(); ++i) {
+            ret.append(" ").append(fields.get(i).toString());
+        }
+        return ret.toString();
     }
 
     /**
@@ -93,8 +103,7 @@ public class Tuple implements Serializable {
      * */
     public Iterator<Field> fields()
     {
-        // some code goes here
-        return null;
+        return fields.iterator();
     }
 
     /**
@@ -102,6 +111,11 @@ public class Tuple implements Serializable {
      * */
     public void resetTupleDesc(TupleDesc td)
     {
-        // some code goes here
+        desc = td;
+        fields = new ArrayList<>();
+        recordId = null;
+        for (int i = 0; i < td.numFields(); ++i) {
+            fields.add(null);
+        }
     }
 }
