@@ -2,6 +2,9 @@ package simpledb;
 
 import java.io.*;
 
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 
 /**
@@ -26,13 +29,18 @@ public class BufferPool {
     constructor instead. */
     public static final int DEFAULT_PAGES = 50;
 
+    private final int pageNumber;
+
+    private final Map<PageId, Page> pageMap;
+
     /**
      * Creates a BufferPool that caches up to numPages pages.
      *
      * @param numPages maximum number of pages in this buffer pool.
      */
     public BufferPool(int numPages) {
-        // some code goes here
+        pageNumber = numPages;
+        pageMap = new HashMap<>();
     }
     
     public static int getPageSize() {
@@ -64,10 +72,25 @@ public class BufferPool {
      * @param pid the ID of the requested page
      * @param perm the requested permissions on the page
      */
-    public  Page getPage(TransactionId tid, PageId pid, Permissions perm)
+    public Page getPage(TransactionId tid, PageId pid, Permissions perm)
         throws TransactionAbortedException, DbException {
-        // some code goes here
-        return null;
+        if (pageMap.containsKey(pid)) {
+            return pageMap.get(pid);
+        }
+
+        if (pageMap.size() == pageSize) {
+            throw new DbException("I am evicting!");
+        }
+        DbFile file = Database.getCatalog().getDatabaseFile(pid.getTableId());
+        byte[] data = file.readPage(pid).getPageData();
+        Page ret;
+        try {
+            ret = new HeapPage((HeapPageId) pid, data);
+        } catch (IOException e) {
+            throw new DbException("IOExecption in creating HeapPage");
+        }
+        pageMap.put(pid, ret);
+        return ret;
     }
 
     /**

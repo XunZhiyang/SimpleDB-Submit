@@ -2,6 +2,7 @@ package simpledb;
 
 import java.io.*;
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.UUID;
 
 /** Helper methods used for testing and implementing random features. */
@@ -152,6 +153,26 @@ public class Utility {
             out += i;
         }
         return out;
+    }
+
+    static public class ArrayIterator<E> implements Iterator<E> {
+        private final E[] array;
+        private int idx = 0;
+
+        public ArrayIterator(E[] array) {
+            this.array = array;
+        }
+
+        @Override
+        public boolean hasNext() {
+            if (idx >= array.length) return false;
+            return array[idx] != null;
+        }
+
+        @Override
+        public E next() {
+            return array[idx++];
+        }
     }
 }
 

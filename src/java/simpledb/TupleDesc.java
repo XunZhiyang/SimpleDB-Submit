@@ -185,7 +185,7 @@ public class TupleDesc implements Serializable {
      */
     public boolean equals(Object o) {
         if (!(o instanceof TupleDesc)) return false;
-        var otherItems = ((TupleDesc) o).tdItems;
+        ArrayList<TDItem> otherItems = ((TupleDesc) o).tdItems;
         if (otherItems.size() != tdItems.size()) return false;
         for (int i = 0; i < tdItems.size(); ++i) {
             if (!tdItems.get(i).fieldType.equals(otherItems.get(i).fieldType)) {
@@ -211,7 +211,7 @@ public class TupleDesc implements Serializable {
     public String toString() {
         // some code goes here
         StringBuilder ret = new StringBuilder();
-        for (var item : tdItems) {
+        for (TDItem item : tdItems) {
             ret.append(item.toString()).append(". ");
         }
         return ret.toString();

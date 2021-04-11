@@ -93,7 +93,7 @@ public class Catalog {
      */
     public TupleDesc getTupleDesc(int tableid) throws NoSuchElementException {
         for (int i = catalogEntries.size() - 1; i >= 0; --i) {
-            var entry = catalogEntries.get(i);
+            CatalogEntry entry = catalogEntries.get(i);
             if (entry.file.getId() == tableid) {
                 return entry.file.getTupleDesc();
             }
@@ -109,7 +109,7 @@ public class Catalog {
      */
     public DbFile getDatabaseFile(int tableid) throws NoSuchElementException {
         for (int i = catalogEntries.size() - 1; i >= 0; --i) {
-            var entry = catalogEntries.get(i);
+            CatalogEntry entry = catalogEntries.get(i);
             if (entry.file.getId() == tableid) {
                 return entry.file;
             }
@@ -119,7 +119,7 @@ public class Catalog {
 
     public String getPrimaryKey(int tableid) {
         for (int i = catalogEntries.size() - 1; i >= 0; --i) {
-            var entry = catalogEntries.get(i);
+            CatalogEntry entry = catalogEntries.get(i);
             if (entry.file.getId() == tableid) {
                 return entry.pkeyField;
             }
@@ -133,7 +133,7 @@ public class Catalog {
 
     public String getTableName(int id) {
         for (int i = catalogEntries.size() - 1; i >= 0; --i) {
-            var entry = catalogEntries.get(i);
+            CatalogEntry entry = catalogEntries.get(i);
             if (entry.file.getId() == id) {
                 return entry.name;
             }
