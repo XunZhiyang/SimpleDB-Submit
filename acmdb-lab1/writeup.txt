@@ -1,0 +1,7 @@
+1. Create an array iterator class in `Utility.java' for C-like arrays.
+
+2. The API is not changed.
+
+3. Nothing is missing.
+
+4. Several hours. Nothing is particularly difficult.
