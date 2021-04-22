@@ -1,0 +1,7 @@
+1. The page eviction policy I chose is FIFO. My  insertion and deletion methods are the ones described in tghe textbook.
+
+2. The API is not changed.
+
+3. Nothing is missing.
+
+4. Several hours. Nothing is particularly difficult.

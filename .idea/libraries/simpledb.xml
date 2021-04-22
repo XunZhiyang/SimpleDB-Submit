@@ -1,0 +1,9 @@
+<component name="libraryTable">
+  <library name="simpledb">
+    <CLASSES>
+      <root url="jar://$PROJECT_DIR$/acmdb-lab1/dist/simpledb.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES />
+  </library>
+</component>
