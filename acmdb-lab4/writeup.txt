@@ -1,0 +1,7 @@
+1. The minimum and the maximum value of one table are used to estimate the selectivity estimation in another one.
+
+2. The API is not changed.
+
+3. Nothing is missing.
+
+4. Several hours. Nothing is particularly difficult.
