@@ -1,0 +1,7 @@
+1. A dependency graph is used to detect deadlocks.	 
+
+2. The API is not changed.
+
+3. Nothing is missing.
+
+4. Several hours. Nothing is particularly difficult.
